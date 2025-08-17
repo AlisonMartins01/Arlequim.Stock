@@ -18,7 +18,6 @@ namespace Arlequim.Stock.Api.Controllers
             return CreatedAtAction(nameof(GetById), new { id }, new { id });
         }
 
-        // --- UPDATE (Admin) ---
         [HttpPut]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update([FromBody] ProductUpdateAsyncRequest request, CancellationToken ct)
@@ -27,7 +26,6 @@ namespace Arlequim.Stock.Api.Controllers
             return NoContent();
         }
 
-        // --- DELETE (Admin) ---
         [HttpDelete("{id:guid}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
@@ -36,7 +34,6 @@ namespace Arlequim.Stock.Api.Controllers
             return NoContent();
         }
 
-        // --- GET BY ID (Public/Authenticated, ajuste se quiser restringir) ---
         [HttpGet("{id:guid}")]
         [AllowAnonymous]
         public async Task<ActionResult<ProductDto?>> GetById(Guid id, CancellationToken ct)
@@ -46,7 +43,6 @@ namespace Arlequim.Stock.Api.Controllers
             return Ok(product);
         }
 
-        // --- LIST ALL (Public/Authenticated) ---
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult<IReadOnlyList<ProductDto>>> List(CancellationToken ct)

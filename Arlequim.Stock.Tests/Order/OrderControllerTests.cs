@@ -47,9 +47,9 @@ namespace Arlequim.Stock.Tests.Order
         }
 
         [Theory]
-        [InlineData(0, 10, 1, 10)]   // page < 1 -> corrige para 1
-        [InlineData(1, 0, 1, 50)]    // pageSize < 1 -> usa default 50 (exemplo)
-        [InlineData(1, 999, 1, 100)] // pageSize > max -> limita a 100
+        [InlineData(0, 10, 1, 10)]   
+        [InlineData(1, 0, 1, 50)]    
+        [InlineData(1, 999, 1, 100)] 
         public async Task GetByUser_ClampsPagination(int page, int size, int expPage, int expSize)
         {
             var userId = Guid.NewGuid();

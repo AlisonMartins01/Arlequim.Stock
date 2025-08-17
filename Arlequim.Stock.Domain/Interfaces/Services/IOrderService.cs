@@ -11,7 +11,7 @@ namespace Arlequim.Stock.Domain.Interfaces.Services
     public interface IOrderService
     {
         Task<OrderCreated> CreateAsync(Guid userId, string customerDocument, string sellerName, IEnumerable<CreateOrderProductsRequest> items, CancellationToken ct = default);
-        Task<IReadOnlyList<OrderListItemResponse>> ListMineAsync(Guid userId, CancellationToken ct = default); // 👈 novo
+        Task<IReadOnlyList<OrderListItemResponse>> ListMineAsync(Guid userId, CancellationToken ct = default);
 
     }
 }

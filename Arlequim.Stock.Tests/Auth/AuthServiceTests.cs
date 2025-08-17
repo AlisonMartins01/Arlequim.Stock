@@ -57,7 +57,6 @@ namespace Arlequim.Stock.Tests.Auth
         private static string Hash(string s) => $"HASH::{s}";
     }
 
-    // ---- interfaces / modelos mínimos para compilar os testes ----
     public interface IUserRepository
     {
         Task<User?> GetByEmailAsync(string email, CancellationToken ct);
@@ -74,8 +73,6 @@ namespace Arlequim.Stock.Tests.Auth
 
         public Task<string> LoginAsync(string email, string password, CancellationToken ct)
         {
-            // simulando seu comportamento atual (lança InvalidOperationException)
-            // em produção, verifique hash/salt; aqui é só exemplo.
             return _repo.GetByEmailAsync(email, ct).ContinueWith(t =>
             {
                 var u = t.Result;

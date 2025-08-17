@@ -26,7 +26,6 @@ namespace Arlequim.Stock.Api.Controllers
             return CreatedAtAction(nameof(GetById), new { id = created.OrderId }, created);
         }
 
-        // stub simples (pode trocar para repo/query real)
         [HttpGet("{id:guid}")]
         public IActionResult GetById(Guid id) => Ok(new { id });
 

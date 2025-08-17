@@ -21,7 +21,6 @@ namespace Arlequim.Stock.Infrastructure.Persistence
         public async Task<IAsyncDisposable> BeginTransactionAsync(CancellationToken ct = default)
         {
             _currentTx = await _db.Database.BeginTransactionAsync(ct);
-            // IDbContextTransaction implementa IAsyncDisposable, então podemos retornar ele mesmo
             return _currentTx;
         }
 

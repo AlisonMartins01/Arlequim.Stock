@@ -121,9 +121,9 @@ namespace Arlequim.Stock.Infrastructure.Persistence
 
                 b.Property(x => x.InvoiceNumber)
                     .IsRequired()
-                    .HasMaxLength(60); // NF obrigatória (H4)
+                    .HasMaxLength(60);
 
-                b.HasIndex(x => x.InvoiceNumber); // ajuda consultas/auditoria
+                b.HasIndex(x => x.InvoiceNumber); 
 
                 b.Property(x => x.CreatedAt)
                     .HasDefaultValueSql("GETUTCDATE()")
@@ -151,11 +151,10 @@ namespace Arlequim.Stock.Infrastructure.Persistence
                     .HasDefaultValueSql("GETUTCDATE()")
                     .ValueGeneratedOnAdd();
 
-                // FIX: Use navigation property instead of foreign key property in WithOne
                 b.HasMany(x => x.Items)
                     .WithOne(x => x.Order)
                     .HasForeignKey(x => x.OrderId)
-                    .OnDelete(DeleteBehavior.Cascade); // apagar pedido apaga itens
+                    .OnDelete(DeleteBehavior.Cascade); 
 
                 b.HasIndex(o => o.UserId);
             }
@@ -182,7 +181,6 @@ namespace Arlequim.Stock.Infrastructure.Persistence
                     .HasPrecision(18, 2)
                     .IsRequired();
 
-                // Evitar duplicidade do mesmo produto no mesmo pedido (opcional, mas útil)
                 b.HasIndex(x => new { x.OrderId, x.ProductId }).IsUnique();
             }
         }

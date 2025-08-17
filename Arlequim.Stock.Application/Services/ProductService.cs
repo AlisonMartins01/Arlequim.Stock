@@ -52,7 +52,6 @@ namespace Arlequim.Stock.Application.Services
             var existing = await productRepository.GetByIdAsync(id, ct)
                 ?? throw new KeyNotFoundException("Product not found");
 
-            // regra: não permitir excluir produto com estoque/pedidos vinculados
             if (await productRepository.HasStockOrOrderItemsAsync(id, ct))
                 throw new InvalidOperationException("Cannot delete a product with stock entries or order items.");
 
@@ -69,7 +68,6 @@ namespace Arlequim.Stock.Application.Services
         public async Task<IEnumerable<ProductDto>> ListAsync(CancellationToken ct = default)
         {
             var list = await productRepository.ListAsync(ct);
-            // já está ordenado no repo; se quiser garantir: list = list.OrderByDescending(x => x.CreatedAt).ToList();
             return list.Select(Map).ToList();
         }
 

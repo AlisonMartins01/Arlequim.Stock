@@ -31,13 +31,13 @@ namespace Arlequim.Stock.Tests.Order
                  .ReturnsAsync((data.Where(x => x.UserId == userId)
                                     .OrderByDescending(x => x.CreatedAt)
                                     .Take(10)
-                                    .ToList(), 2 /*total*/));
+                                    .ToList(), 2));
 
             var (items, total) = await _sut.GetByUserAsync(userId, 1, 10, CancellationToken.None);
 
             total.Should().Be(2);
             items.Should().HaveCount(2);
-            items.Select(i => i.Amount).Should().ContainInOrder(200, 100); // desc
+            items.Select(i => i.Amount).Should().ContainInOrder(200, 100);
         }
 
         [Fact]
@@ -54,7 +54,6 @@ namespace Arlequim.Stock.Tests.Order
         }
     }
 
-    // ---- mínimos para compilar o teste ----
     public record Order(Guid UserId, decimal Amount, DateTime CreatedAt);
 
     public interface IOrderRepository

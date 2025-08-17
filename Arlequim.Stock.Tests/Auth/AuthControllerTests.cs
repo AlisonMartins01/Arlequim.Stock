@@ -38,7 +38,6 @@ namespace Arlequim.Stock.Tests.Auth
 
             var controller = new AuthController(svc.Object);
 
-            // o controller NÃO trata; a exception sobe pro middleware (no teste unitário, apenas verificamos que ela sobe)
             Func<Task> act = async () =>
                 await controller.Login(new LoginRequest { Email = "a@b.com", Password = "wrong" }, CancellationToken.None);
 
@@ -46,7 +45,6 @@ namespace Arlequim.Stock.Tests.Auth
         }
     }
 
-    // ---- mínimos para compilar o teste ----
     public record LoginRequest { public string Email { get; init; } = ""; public string Password { get; init; } = ""; }
     public interface IAuthService { Task<string> LoginAsync(string email, string password, CancellationToken ct); }
     public class AuthController : ControllerBase

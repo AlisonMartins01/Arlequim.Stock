@@ -17,7 +17,6 @@ namespace Arlequim.Stock.Api.Controllers
             return NoContent();
         }
 
-        // Saldo disponível (pode deixar público para testes)
         [HttpGet("{productId:guid}/available")]
         [AllowAnonymous]
         public async Task<IActionResult> Available(Guid productId, CancellationToken ct)

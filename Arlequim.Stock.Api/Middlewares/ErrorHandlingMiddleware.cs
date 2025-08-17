@@ -27,7 +27,6 @@ namespace Arlequim.Stock.Api.Middlewares
                 title,
                 status,
                 traceId = ctx.TraceIdentifier,
-                // detalhe opcional (não exponha stack em prod)
                 detail = ex is ArgumentException aex ? aex.Message : ex.Message
             };
 

@@ -22,7 +22,6 @@ namespace Arlequim.Stock.Infrastructure.Repositories
 
         public Task<Product?> GetByIdAsync(Guid id, CancellationToken ct = default)
         {
-            // Se quiser carregar navegações, adicione Include(...)
             return _db.Products.FirstOrDefaultAsync(p => p.Id == id, ct);
         }
 

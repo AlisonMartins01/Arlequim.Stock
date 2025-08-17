@@ -13,8 +13,6 @@ namespace Arlequim.Stock.Domain.Entities
         public Guid ProductId { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
-
-        // Navegações ✅ (adicione estas duas se não existirem)
         public Order? Order { get; set; }
         public Product? Product { get; set; }
     }

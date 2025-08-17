@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Arlequim.Stock.Domain.Entities
 {
     public class User
-    {//Id, Name, Email, PasswordHash, Role[Admin|Seller], CreatedAt
+    {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
