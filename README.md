@@ -36,6 +36,7 @@ Responsável por:
 
 - [.NET 9 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
 - [Docker](https://www.docker.com/)
+- Docker Desktop em execução (Windows/Mac) ou Docker Engine (Linux)
 
 > ℹ️ **Nota Importante:** Não é necessário instalar o SQL Server localmente.  
 > O banco de dados sobe automaticamente via Docker Compose.  
