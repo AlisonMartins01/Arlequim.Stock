@@ -1,0 +1,46 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: stock_sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=S3gur0!@123
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssqldata:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P S3gur0!@123 -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 20
+    networks:
+      - arlequim-net
+
+  api:
+    build:
+      context: .
+      dockerfile: Arlequim.Stock.Api/Dockerfile
+    container_name: stock_api
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__Default=Server=sqlserver,1433;Database=ArlequimStockDb;User Id=sa;Password=S3gur0!@123;TrustServerCertificate=True
+      - Jwt__Issuer=Arlequim
+      - Jwt__Audience=ArlequimClients
+      - Jwt__Key=mysupersecretkey_dev_1234567890!@#
+      - Jwt__ExpiresMinutes=60
+    ports:
+      - "5089:8080"
+    depends_on:
+      - sqlserver
+    networks:
+      - arlequim-net
+
+volumes:
+  mssqldata:
+
+networks:
+  arlequim-net:
